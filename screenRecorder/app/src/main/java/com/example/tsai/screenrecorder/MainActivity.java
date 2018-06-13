@@ -2,6 +2,8 @@ package com.example.tsai.screenrecorder;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.display.DisplayManager;
@@ -24,11 +26,13 @@ import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 import android.widget.VideoView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton toggleButton;
     private VideoView videoView;
     private String videoUri="";
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
         mScreenDensity = metrics.densityDpi;
 
         //Get Screen
-        //DISPLAY_HEIGHT = metrics.heightPixels;
-        //DISPLAY_WIDTH = metrics.widthPixels;
+//        DISPLAY_HEIGHT = metrics.heightPixels;
+//        DISPLAY_WIDTH = metrics.widthPixels;
 
         mediaRecorder = new MediaRecorder();
         mediaProjectionManager = (MediaProjectionManager) getSystemService(getApplicationContext().MEDIA_PROJECTION_SERVICE);
@@ -99,8 +104,34 @@ public class MainActivity extends AppCompatActivity {
         videoView = (VideoView) findViewById(R.id.videoView);
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+        button = (Button) findViewById(R.id.btn_logout);
 
-        //event
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Exit");
+                builder.setMessage("Do you want to exit screen recorder?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+
+        //event toggle button
         toggleButton.setOnClickListener(new View.OnClickListener() {               //View.OnClickListener is actually OnClickListener itself
             @Override
             public void onClick(View v) {
@@ -137,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     toggleScreenShare(v);
-                    
+
+
                 }
             }
         });
@@ -159,32 +191,7 @@ public class MainActivity extends AppCompatActivity {
             videoView.start();
         }
     }
-//
-//    public String getFilePath() {
-//        final String directory = Environment.getExternalStorageDirectory() + File.separator + "Recordings";
-//        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-//            Toast.makeText(this, "Failed to get External Storage", Toast.LENGTH_SHORT).show();
-//            return null;
-//        }
-//        final File folder = new File(directory);
-//        boolean success = true;
-//        if (!folder.exists()) {
-//            success = folder.mkdir();
-//        }
-//        String filePath;
-//        if (success) {
-//            String videoName = ("capture_" + getCurSysDate() + ".mp4");
-//            filePath = directory + File.separator + videoName;
-//        } else {
-//            Toast.makeText(this, "Failed to create Recordings directory", Toast.LENGTH_SHORT).show();
-//            return null;
-//        }
-//        return filePath;
-//    }
-//
-//    public String getCurSysDate() {
-//        return new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-//    }
+
 
 
     private void initRecorder() {
@@ -192,19 +199,18 @@ public class MainActivity extends AppCompatActivity {
             //setAudioSource: Sets the audio source to be used for recording
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
-           // mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-
-
-            videoUri = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    + new StringBuilder("/EDMTRecord_").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append("mp4").toString();
-
-            mediaRecorder.setOutputFile(videoUri);
             mediaRecorder.setVideoSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
             mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            mediaRecorder.setVideoEncodingBitRate(512*1000);
+            mediaRecorder.setVideoEncodingBitRate(3000000);
             mediaRecorder.setVideoFrameRate(30);
+
+            videoUri = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    + new StringBuilder("Screen_Recorder_").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append("mp4").toString();
+
+            mediaRecorder.setOutputFile(videoUri);
+
 
 
             // getRotation: Returns the rotation of the screen from its "natural" orientation.
@@ -258,6 +264,8 @@ public class MainActivity extends AppCompatActivity {
         virtualDisplay = createVirtualDisplay();
         mediaRecorder.start();
     }
+
+
 
     //MediaProjection.Callback:Callbacks for the projection session.
     private class MediaProjectionCallback extends MediaProjection.Callback{
@@ -321,27 +329,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

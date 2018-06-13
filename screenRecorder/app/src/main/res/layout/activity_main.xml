@@ -5,6 +5,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/gators"
     tools:context=".MainActivity">
 
     <ToggleButton
@@ -12,13 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:textOff="Record"
-        android:textOn="Stop recoding" />
+        android:layout_above="@+id/btn_logout"
+        android:textOff="Start"
+        android:textOn="Stop" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        />
 
     <VideoView
         android:layout_above="@+id/toggleButton"
+        android:layout_below="@+id/btn_logout"
         android:id="@+id/videoView"
         android:visibility="invisible"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
