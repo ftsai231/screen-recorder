@@ -19,11 +19,21 @@
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:text="Exit"
 
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Exit" />
+
+    <Button
+        android:id="@+id/replay"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:text="replay" />
 
     <ToggleButton
         android:id="@+id/pause"

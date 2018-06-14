@@ -65,17 +65,19 @@ public class MainActivity extends AppCompatActivity {
     private MediaRecorder mediaRecorder;
 
     private int mScreenDensity;
+
+    //the size of the video that will be played after recording
     private static int DISPLAY_WIDTH = 720;
     private static int DISPLAY_HEIGHT = 1280;
 
     //This is the block of code that will get invoked when your class is loaded by classloader
     //Classloader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine
     static {
+
         ORIENTATION.append(Surface.ROTATION_0,90);
         ORIENTATION.append(Surface.ROTATION_90,0);
         ORIENTATION.append(Surface.ROTATION_180,270);
         ORIENTATION.append(Surface.ROTATION_270,180);
-
     }
 
     //view
@@ -85,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
     private String videoUri="";
     private Button button;
     private ToggleButton pause;
+    private Button replayButton;
 
+    //for the replay button.
+    boolean finishRecording = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mScreenDensity = metrics.densityDpi;
 
-
-
         mediaRecorder = new MediaRecorder();
         mediaProjectionManager = (MediaProjectionManager) getSystemService(getApplicationContext().MEDIA_PROJECTION_SERVICE);
 
@@ -111,6 +114,34 @@ public class MainActivity extends AppCompatActivity {
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         button = (Button) findViewById(R.id.btn_logout);
         pause = (ToggleButton) findViewById(R.id.pause);
+        replayButton = (Button) findViewById(R.id.replay);
+
+        //replay button: for replaying the video
+        //the video can only be replayed once the video is done playing
+        replayButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(finishRecording){
+                    videoView.start();
+                }
+                else{
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Replay");
+                    builder.setMessage("No video to play!");
+                    builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    //Creates an AlertDialog with the arguments supplied to this builder.
+                    AlertDialog dialog = builder.create();
+
+                    dialog.show();
+                }
+            }
+        });
 
 
         //this is for pause and resume button
@@ -197,13 +228,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toggleScreenShare(View v) {
-        if(((ToggleButton)v).isChecked()){          //isCheck():to check if android checkbox is checked within its onClick method (on vs. off)
+        if(((ToggleButton)v).isChecked()){
+            //isCheck():to check if android checkbox is checked within its onClick method (on vs. off)
+
+            //for replaying button
+            finishRecording = false;
 
             initRecorder();
             recordScreen();
 
         }
         else{
+            //for the replay button
+            finishRecording = true;
 
             mediaRecorder.stop();
             mediaRecorder.reset();
@@ -215,7 +252,6 @@ public class MainActivity extends AppCompatActivity {
             videoView.start();
         }
     }
-
 
 
     private void initRecorder() {
@@ -276,6 +312,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Unk error", Toast.LENGTH_SHORT).show();
             return;
         }
+
         if(resultCode != RESULT_OK){
             Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
             toggleButton.setChecked(false);
@@ -300,6 +337,7 @@ public class MainActivity extends AppCompatActivity {
                 mediaRecorder.stop();
                 mediaRecorder.reset();
             }
+
             mediaProjection = null;
             stopRecordScreen();
             super.onStop();
@@ -310,8 +348,9 @@ public class MainActivity extends AppCompatActivity {
         if(virtualDisplay == null){
             return;
         }
-        virtualDisplay.release();
+
         //Releases the virtual display and destroys its underlying surface.
+        virtualDisplay.release();
 
         destroyMediaProjection();
     }
@@ -321,6 +360,7 @@ public class MainActivity extends AppCompatActivity {
             mediaProjection.unregisterCallback(mediaProjectionCallback);
             //unregisterCallback: Unregisters the specified callback.
             //If an update has already been posted you may still receive it after calling this method.
+
             mediaProjection.stop();
             mediaProjection = null;
         }
@@ -352,6 +392,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }).show();
                 }
+                
                 return;
             }
         }
