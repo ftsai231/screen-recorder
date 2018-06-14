@@ -148,10 +148,30 @@ public class MainActivity extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(pause.isChecked()){
-                    mediaRecorder.pause();
+                if (toggleButton.isChecked()) {
+                    if (pause.isChecked()) {
+                        mediaRecorder.pause();
+                    } else {
+                        mediaRecorder.resume();
+                    }
                 }else{
-                    mediaRecorder.resume();
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("No video");
+                    builder.setMessage("You can only pause when the screen recorder is recoring!");
+                    builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    //Creates an AlertDialog with the arguments supplied to this builder.
+                    AlertDialog dialog = builder.create();
+
+                    dialog.show();
+
+                    //the button will not return into resume if clicked
+                    pause.setChecked(false);
                 }
             }
         });
@@ -392,7 +412,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }).show();
                 }
-                
+
                 return;
             }
         }
