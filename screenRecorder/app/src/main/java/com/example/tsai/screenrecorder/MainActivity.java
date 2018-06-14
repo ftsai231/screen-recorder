@@ -56,8 +56,10 @@ public class MainActivity extends AppCompatActivity {
     //system audio. The exact capabilities granted depend on the type of MediaProjection.
     private MediaProjectionManager mediaProjectionManager;
     private MediaProjection mediaProjection;
+
     //Represents a virtual display. The content of a virtual display is rendered to a Surface that you must provide to createVirtualDisplay()
     private VirtualDisplay virtualDisplay;
+
     //MediaProjection.Callback:Callbacks for the projection session.
     private MediaProjectionCallback mediaProjectionCallback;
     private MediaRecorder mediaRecorder;
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
     //This is the block of code that will get invoked when your class is loaded by classloader
     //Classloader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine
-
     static {
         ORIENTATION.append(Surface.ROTATION_0,90);
         ORIENTATION.append(Surface.ROTATION_90,0);
@@ -107,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
 
-        //create the object of different button in this app
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         button = (Button) findViewById(R.id.btn_logout);
         pause = (ToggleButton) findViewById(R.id.pause);
