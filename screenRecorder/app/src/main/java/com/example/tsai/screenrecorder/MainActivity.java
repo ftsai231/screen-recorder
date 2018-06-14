@@ -85,32 +85,35 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private ToggleButton pause;
 
-    boolean isRecording = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DisplayMetrics metrics = new DisplayMetrics();    //A structure describing general information about a display, such as its size, density, and font scaling
+        //A structure describing general information about a display, such as its size, density, and font scaling
+        DisplayMetrics metrics = new DisplayMetrics();
+
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mScreenDensity = metrics.densityDpi;
 
-        //Get Screen
-//        DISPLAY_HEIGHT = metrics.heightPixels;
-//        DISPLAY_WIDTH = metrics.widthPixels;
+
 
         mediaRecorder = new MediaRecorder();
         mediaProjectionManager = (MediaProjectionManager) getSystemService(getApplicationContext().MEDIA_PROJECTION_SERVICE);
 
         //view
         videoView = (VideoView) findViewById(R.id.videoView);
-        toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
+
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+
+        //create the object of different button in this app
+        toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         button = (Button) findViewById(R.id.btn_logout);
         pause = (ToggleButton) findViewById(R.id.pause);
 
 
+        //this is for pause and resume button
         pause.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //exit button
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -149,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //event toggle button
-        toggleButton.setOnClickListener(new View.OnClickListener() {               //View.OnClickListener is actually OnClickListener itself
+        //View.OnClickListener is actually OnClickListener itself
+        toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -194,13 +198,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void toggleScreenShare(View v) {
         if(((ToggleButton)v).isChecked()){          //isCheck():to check if android checkbox is checked within its onClick method (on vs. off)
-            isRecording = true;
+
             initRecorder();
             recordScreen();
 
         }
         else{
-            isRecording = false;
+
             mediaRecorder.stop();
             mediaRecorder.reset();
             stopRecordScreen();
@@ -306,14 +310,17 @@ public class MainActivity extends AppCompatActivity {
         if(virtualDisplay == null){
             return;
         }
-        virtualDisplay.release();   //Releases the virtual display and destroys its underlying surface.
+        virtualDisplay.release();
+        //Releases the virtual display and destroys its underlying surface.
+
         destroyMediaProjection();
     }
 
     private void destroyMediaProjection() {
         if(mediaProjection != null){
             mediaProjection.unregisterCallback(mediaProjectionCallback);
-            //unregisterCallback: Unregisters the specified callback. If an update has already been posted you may still receive it after calling this method.
+            //unregisterCallback: Unregisters the specified callback.
+            //If an update has already been posted you may still receive it after calling this method.
             mediaProjection.stop();
             mediaProjection = null;
         }
