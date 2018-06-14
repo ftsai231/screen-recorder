@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
     private VideoView videoView;
     private String videoUri="";
     private Button button;
+    private ToggleButton pause;
+
+    boolean isRecording = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,20 @@ public class MainActivity extends AppCompatActivity {
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         button = (Button) findViewById(R.id.btn_logout);
+        pause = (ToggleButton) findViewById(R.id.pause);
+
+
+        pause.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(pause.isChecked()){
+                    mediaRecorder.pause();
+                }else{
+                    mediaRecorder.resume();
+                }
+            }
+        });
+
 
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -177,10 +194,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void toggleScreenShare(View v) {
         if(((ToggleButton)v).isChecked()){          //isCheck():to check if android checkbox is checked within its onClick method (on vs. off)
+            isRecording = true;
             initRecorder();
             recordScreen();
+
         }
         else{
+            isRecording = false;
             mediaRecorder.stop();
             mediaRecorder.reset();
             stopRecordScreen();
