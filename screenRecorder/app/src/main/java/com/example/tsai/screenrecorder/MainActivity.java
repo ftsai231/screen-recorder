@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private ToggleButton pause;
     private Button replayButton;
+    private Button videoList;
 
     //for the replay button.
     boolean finishRecording = false;
@@ -115,6 +116,16 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.btn_logout);
         pause = (ToggleButton) findViewById(R.id.pause);
         replayButton = (Button) findViewById(R.id.replay);
+        videoList = (Button) findViewById(R.id.videoList);
+
+
+        videoList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(MainActivity.this, VideoShow.class);
+                startActivity(i);
+            }
+        });
 
         //replay button: for replaying the video
         //the video can only be replayed once the video is done playing
@@ -172,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
 
                     //the button will not return into resume if clicked
                     pause.setChecked(false);
+
+                    //button.setClickable(false);    also a method when there is no video
                 }
             }
         });
@@ -287,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
             mediaRecorder.setVideoFrameRate(30);
 
             videoUri = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    + new StringBuilder("Screen_Recorder_").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append("mp4").toString();
+                    + new StringBuilder("UF").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append("screenrecorder.mp4").toString();
 
             mediaRecorder.setOutputFile(videoUri);
 
