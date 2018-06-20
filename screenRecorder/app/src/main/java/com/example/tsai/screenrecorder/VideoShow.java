@@ -27,13 +27,9 @@ public class VideoShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_show);
 
-//        ScrollView scrollView = (ScrollView) findViewById(R.id.)
-//
-//        scrollView.post(new Runnable() {
-//            public void run() {
-//                scrollView.fullScroll(View.FOCUS_DOWN);
-//            }
-//        });
+
+
+
 
         goBack = (Button) findViewById(R.id.goBack);
 
@@ -43,17 +39,6 @@ public class VideoShow extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
-
-
-
-
-
-
-
 
 
         playList = findViewById(R.id.playList);

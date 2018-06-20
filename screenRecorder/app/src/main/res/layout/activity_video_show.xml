@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@mipmap/darkroad"
+    >
 
     <RelativeLayout
 
-    android:id="@+id/rootLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-    android:id="@+id/goBack"
-    android:layout_width="135dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:text="Go Back"
-    />
+        <Button
+            android:id="@+id/goBack"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Go Back" />
 
 
         <VideoView
@@ -31,16 +34,29 @@
             android:layout_gravity="center"
             android:visibility="visible" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_alignParentEnd="true"
+
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:visibility="visible"
+            android:src="@drawable/florida"
+             />
+
         <EditText
             android:id="@+id/editText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/goBack"
+            android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
-            android:ems="10"
+            android:textColor="#ffffff"
+            android:ems="15"
+            android:textSize="22sp"
             android:inputType="textMultiLine"
-            android:text="This app is for screen recording.I made this app for practicing my coding skill. This is the very first app I made and the first project I did all by myself, so the quality is not very good (Yes, I know!) , but no doubt I had lots of fun during the process.
-As you can see, there are four more buttons besides the introduction button on the page: start, pause, replay and exit. You can start to record by press the start button, and after you pressing that button, the button will turn into a stop button. You can stop recording by press the stop button. During recording, if you want to pause the recorder, there is a pause button. When you press the pause button, the recorder will pause recording, and the button will turn into a resume button. If you want to continue recording, please press the resume button. After the recording is done, the video will be shown in the center of the home page, and you can see what you have recorded. You can press the replay button to play the video again. Of course, the video will be automatically save into your gallery after you stop recording, so you can also watch the video again in your gallery! You can press the exit button to exit the app! (I think you are smart enough to figure out the function of each button without reading this article.)Hope you enjoy using this app!
+            android:text="This app is for screen recording, and I made this app for practicing my coding skill. This is the very first android app I made and the first project I did all by myself, so the quality is not very good (Yes, I know!) , but no doubt I had lots of fun during the process.
+As you can see, there are four more buttons besides the introduction button on the page: start, pause, replay and exit. You can start to record by press the start button, and after you pressing that button, the button will turn into a stop button. You can stop recording by press the stop button. During recording, if you want to pause the recorder, there is a pause button. When you press the pause button, the recorder will pause recording, and the button will turn into a resume button. If you want to continue recording, please press the resume button. After the recording is done, the video will be shown in the center of the home page, and you can see what you have recorded. You can press the replay button to play the video again. Of course, the video will be automatically save into your gallery after you stop recording, so you can also watch the video again in your gallery! You can press the exit button to exit the app! (I think you are smart enough to figure out the function of each button without reading this article.) The video below is an example. Hope you enjoy using this app! 6/19/2018
+
 
 "
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
