@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         >
 
+
         <Button
             android:id="@+id/goBack"
             android:layout_width="135dp"
@@ -23,6 +24,7 @@
             android:layout_alignParentTop="true"
             android:text="Go Back"
             />
+
 
         <EditText
             android:id="@+id/editText"
@@ -33,8 +35,9 @@
             android:textColor="#ffffff"
             android:textSize="22sp"
             android:inputType="textMultiLine"
-            android:text="This app is for screen recording, and I made this app for practicing my coding skill when I was a master student in the University of Florida (the image on the top-right corner is the logo of my school). This is the very first android app I made and the first project I did all by myself, so the quality is not very good (Yes, I know!) , but no doubt I had lots of fun during the process and also learn a lot.
-As you can see, there are four more buttons besides the about button on the page: start, pause, replay and exit. You can start to record by press the start button, and after you pressing that button, the button will change to a stop button. You can stop recording by press the stop button. During recording, if you want to pause the recorder, there is a pause button. When you press the pause button, the recorder will pause recording, and the button will change to a resume button. If you want to continue recording, please press the resume button. After the recording is done, the video will be shown in the center of the home page, and you can see what you have recorded. You can press the replay button to play the video again. Of course, the video will be automatically save into your device after you stop recording, so you can also watch the video again in your gallery! You can press the exit button to leave the app!  The video below is an example. Hope you enjoy using this app! 6/20/2018"
+            android:text="This app is for screen recording, and I made this app for practicing my coding skill during the summer vacation when I was a master student in the University of Florida (the image on the top-right corner is the logo of my school). I switch my major from photonics, which I studied in college, to computer engineering, and I found coding is much more interesting than studing abstract theories such as Electromagnetism or Optics. This is the very first android app I made and the first project I did all by myself. No doubt I had lots of fun during the process and also learn a lot. The sense of accomplishment is Indescribable after finishing this project!
+　
+As you can see, there are four more buttons besides the about button on the page: start, pause, replay and exit. You can start to record by press the start button, and after you pressing that button, the button will change to a stop button. You can stop recording by press the stop button. During recording, if you want to pause the recorder, there is a pause button. When you press the pause button, the recorder will pause recording, and the button will change to a resume button. If you want to continue recording, please press the resume button. After the recording is done, the video will be shown in the center of the home page, and you can see what you have recorded. You can press the replay button to play the video again. Of course, the video will be automatically save into your device after you stop recording, so you can also watch the video again in your gallery! You can press the exit button to leave the app!  The video below is an example (Please press the screen to play the video). Hope you enjoy using this app! 6/22/2018"
 
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
             />
@@ -42,13 +45,14 @@ As you can see, there are four more buttons besides the about button on the page
 
         <VideoView
             android:id="@+id/playList"
-            android:layout_width="288dp"
-            android:layout_height="391dp"
+            android:layout_width="330dp"
+            android:layout_height="450dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/editText"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:visibility="visible" />
+
 
         <ImageView
             android:id="@+id/imageView"
@@ -59,7 +63,6 @@ As you can see, there are four more buttons besides the about button on the page
             android:visibility="visible"
             android:src="@drawable/florida"
              />
-
 
 
     </RelativeLayout>

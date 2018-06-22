@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
             mediaRecorder.setVideoEncodingBitRate(3000000);
             mediaRecorder.setVideoFrameRate(30);
 
-            videoUri = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            videoUri = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
                     + new StringBuilder("UF").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append(".mp4").toString();
 
             mediaRecorder.setOutputFile(videoUri);

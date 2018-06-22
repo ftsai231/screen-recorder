@@ -21,7 +21,6 @@ public class VideoShow extends AppCompatActivity {
     ScrollView scroll_View;
     EditText mEdit;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +58,15 @@ public class VideoShow extends AppCompatActivity {
         mController = new MediaController(this);
 
         //set the uri of the name of my video i wanna play
-        Uri uri=Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.video_1529442656);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.video);
 
         playList.setVideoURI(uri);
 
         mController.setAnchorView(playList);
 
         playList.setMediaController(mController);
-        playList.requestFocus();
-        playList.start();
+
+//        playList.start();
 
     }
 }
