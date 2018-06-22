@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         videoList = (Button) findViewById(R.id.videoList);
 
 
+        //when clicking, it will start another activity for demo the app and some introduction
         videoList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 
         //replay button: for replaying the video
         //the video can only be replayed once the video is done playing
@@ -188,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         //exit button
         button.setOnClickListener(new View.OnClickListener(){
@@ -300,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
             mediaRecorder.setVideoFrameRate(30);
 
             videoUri = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    + new StringBuilder("UF").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append("screenrecorder.mp4").toString();
+                    + new StringBuilder("UF").append(new SimpleDateFormat("dd-MM-yyyy-hh_mm_ss").format(new Date())).append(".mp4").toString();
 
             mediaRecorder.setOutputFile(videoUri);
 

@@ -10,10 +10,10 @@
     >
 
     <RelativeLayout
-
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <Button
             android:id="@+id/goBack"
@@ -21,7 +21,23 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Go Back" />
+            android:text="Go Back"
+            />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:inputType="textMultiLine"
+            android:text="This app is for screen recording, and I made this app for practicing my coding skill when I was a master student in the University of Florida (the image on the top-right corner is the logo of my school). This is the very first android app I made and the first project I did all by myself, so the quality is not very good (Yes, I know!) , but no doubt I had lots of fun during the process and also learn a lot.
+As you can see, there are four more buttons besides the about button on the page: start, pause, replay and exit. You can start to record by press the start button, and after you pressing that button, the button will change to a stop button. You can stop recording by press the stop button. During recording, if you want to pause the recorder, there is a pause button. When you press the pause button, the recorder will pause recording, and the button will change to a resume button. If you want to continue recording, please press the resume button. After the recording is done, the video will be shown in the center of the home page, and you can see what you have recorded. You can press the replay button to play the video again. Of course, the video will be automatically save into your device after you stop recording, so you can also watch the video again in your gallery! You can press the exit button to leave the app!  The video below is an example. Hope you enjoy using this app! 6/20/2018"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
+            />
 
 
         <VideoView
@@ -44,22 +60,7 @@
             android:src="@drawable/florida"
              />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
-            android:ems="15"
-            android:textSize="22sp"
-            android:inputType="textMultiLine"
-            android:text="This app is for screen recording, and I made this app for practicing my coding skill. This is the very first android app I made and the first project I did all by myself, so the quality is not very good (Yes, I know!) , but no doubt I had lots of fun during the process.
-As you can see, there are four more buttons besides the introduction button on the page: start, pause, replay and exit. You can start to record by press the start button, and after you pressing that button, the button will turn into a stop button. You can stop recording by press the stop button. During recording, if you want to pause the recorder, there is a pause button. When you press the pause button, the recorder will pause recording, and the button will turn into a resume button. If you want to continue recording, please press the resume button. After the recording is done, the video will be shown in the center of the home page, and you can see what you have recorded. You can press the replay button to play the video again. Of course, the video will be automatically save into your gallery after you stop recording, so you can also watch the video again in your gallery! You can press the exit button to exit the app! (I think you are smart enough to figure out the function of each button without reading this article.) The video below is an example. Hope you enjoy using this app! 6/19/2018
 
-
-"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
 
     </RelativeLayout>
 

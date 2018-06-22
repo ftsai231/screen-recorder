@@ -5,7 +5,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/wallpaper"
+    android:background="@mipmap/sea"
     tools:context=".MainActivity">
 
     <ToggleButton
@@ -34,7 +34,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
-        android:text="example" />
+        android:text="about" />
 
     <Button
         android:id="@+id/replay"
